@@ -9,7 +9,8 @@ Learning series about nodejs
 
 ## Introduction
 
-> `node_modules` including `fs, path, url, events` mentioned in this section \
+> All the necessary files is in Introduction directory \
+> `node_modules` including `fs, path, url, events, http` mentioned in this section \
 > Usage of some modules explained with a simple example
 
 ## Supplementary Code Snippets
