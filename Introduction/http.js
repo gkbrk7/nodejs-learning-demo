@@ -1,7 +1,8 @@
 const http = require("http")
-const routes = require("./routes")
 
-const server = http.createServer(routes)
+const routes = require('./routes');
+
+const server = http.createServer(routes);
 
 // const server = http.createServer((req, res) => {
 
@@ -52,7 +53,6 @@ const server = http.createServer(routes)
 //         }
 //     })
 
-//     res.setHeader("Content-Type", "text/html")
 //     if (req.url === "/") {
 //         res.write(`<html>
 //         <head>
@@ -70,21 +70,7 @@ const server = http.createServer(routes)
 //     }
 
 //     if (req.url === "/log" && req.method === "POST") {
-
-//         // body parser
-//         const body = []
-//         req.on("data", function (chunk) {
-//             body.push(chunk)
-//             console.log(chunk)
-//         })
-
-//         req.on("end", () => {
-//             const bodyParsed = Buffer.concat(body).toString()
-//             const message = bodyParsed.split("=")[1]
-//             console.log(qs.parse(bodyParsed))
-//             fs.appendFileSync("Introduction/log.txt", message)
-//         })
-
+//         fs.writeFileSync("Introduction/log.txt", "deneme")
 //         res.statusCode = 302
 //         res.setHeader("Location", "/")
 //         return res.end()
