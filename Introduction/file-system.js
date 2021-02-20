@@ -7,7 +7,7 @@ const files = fs.readdir("./", function (err, files) {
     else console.log(files)
 })
 
-const data = fs.readFile("index.html", "utf-8", function (err, file) {
+const data = fs.readFile("Introduction/index.html", "utf-8", function (err, file) {
     if (err) console.log(err)
     else console.log(file)
 })
@@ -19,7 +19,7 @@ fs.writeFile("deneme.txt", "Hello World", function (err) {
 
 fs.appendFile("deneme.txt", " Gokberk Yıldırım", function (err) {
     if (err) console.log(err)
-    else console.log("File is created successfully.")
+    else console.log("File is appended successfully.")
 })
 
 fs.unlink("deneme.txt", function (err) {
