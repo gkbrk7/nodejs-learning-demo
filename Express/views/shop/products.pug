@@ -3,10 +3,14 @@ extends ../layouts/main-layout.pug
 include ../mixins/createProduct.pug
 
 block content
-    
-    .row.my-5
-        if data.length > 0
-            each product in data
-                +createProduct(product)
-        else 
-            h1 No Products
+    .row
+        .col-md-3
+            include ../includes/menu.pug
+
+        .col-md-9
+            .row
+                if data.length > 0
+                    each product in data
+                        +createProduct(product)
+                else 
+                    h1 No Products

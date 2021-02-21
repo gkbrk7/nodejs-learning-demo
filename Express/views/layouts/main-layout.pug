@@ -7,11 +7,8 @@ html(lang="en")
         
         include ../includes/navbar.pug
 
-        .container.pt-100
+        .container.pt-100.mb-5
             .row
-                .col-lg-3
-                    include ../includes/menu.pug
-                .col-lg-9
-                    block content
+                block content
 
     include ../includes/scripts.pug
