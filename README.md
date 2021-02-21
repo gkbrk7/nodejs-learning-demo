@@ -30,3 +30,15 @@ Learning series about nodejs
 > If define a npm script name reserved by npm, this command canbe executed with `npm run [command_name]`
 
 ## Express
+
+> `npm i express` install express
+> Simple Code Sample to get started, write code snippet below into app.js
+
+```javascript
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+```
