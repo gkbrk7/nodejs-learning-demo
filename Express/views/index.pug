@@ -1,43 +1,14 @@
 extends layouts/main-layout.pug
 
+include mixins/createProduct.pug
+
 block content
-    #carouselExampleDark.carousel.carousel-dark.slide(data-bs-ride="carousel")
-        .carousel-indicators
-            button(type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1").active
-            button(type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2")
-            button(type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3")
-
-        .carousel-inner
-            .carousel-item.active(data-bs-interval="10000")
-                img(src="/img/slider1.png" alt="...").d-block.w-100
-
-            .carousel-item(data-bs-interval="2000")
-                img(src="/img/slider2.png" alt="...").d-block.w-100
-
-            .carousel-item
-                img(src="/img/slider3.png" alt="...").d-block.w-100
-
-        button(type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev").carousel-control-prev
-            span.carousel-control-prev-icon(aria-hidden="true")
-            span.visually-hidden Previous
-        
-        button(type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next").carousel-control-next
-            span.carousel-control-next-icon(aria-hidden="true")
-            span.visually-hidden Next
+    
+    include includes/slider.pug
 
     .row.my-5
-        each product in data
-            .col-md-4.my-2
-                .card
-                    img(src=`/img/${product.image}` alt=`${product.description}`).card-img-top
-                    .card-body
-                        h4.card-title
-                            a(href="#") #{product.name}
-
-                        p.card-text.pt-2 #{product.description}
-                            
-                    .card-footer
-                        small.text-muted
-                            i.fas.fa-lira-sign #{product.price}
-                        a(href="#").btn.btn-secondary.btn-sm.float-end
-                            i.fa.fa-angle-double-right Details 
+        if data.length > 0
+            each product in data
+                +createProduct(product)
+        else 
+            h1 No Products

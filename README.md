@@ -7,11 +7,12 @@ Learning series about nodejs
 - [Introduction](#introduction)
 - [Npm](#npm)
 - [Express](#express)
-- [Template Engine (Pug)](#template-engine%20-%20pug)
+- [Template Engine (Pug)](#template-engine-pug)
+- [Mvc](#mvc)
 
 ## Introduction
 
-> All the necessary files is in Introduction directory \
+> All the necessary files are in Introduction directory \
 > `node_modules` including `fs, path, url, events, http, querystring` mentioned in this section \
 > Usage of some modules explained with a simple example
 
@@ -56,7 +57,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 ```
 
-## Template Engine - Pug
+## Template Engine-Pug
 
 > There are several popular templates engines like `ejs, pug, handlebars` \
 > Install npm package first with the command `npm i pug` \
@@ -68,4 +69,11 @@ app.set("views", "./views");
 ```
 
 > Use `block [block_name]` to render block of codes into pug file \
-> Use `#{name}` to define a variable in the layout page
+> Use `#{name}` to define a variable in the layout page \
+> Use `include [file_path]` to import pug code block into layout \
+> Use `mixin [function]` to define a function in pug file and use defined function like `+[function]` \
+> After layout definition, it is needed to introduce the layout to every page. Therefore, add `extends layouts/main-layout.pug` at the top of page
+
+## Mvc
+
+> models, controllers and views directories added
