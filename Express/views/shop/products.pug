@@ -1,11 +1,9 @@
-extends layouts/main-layout.pug
+extends ../layouts/main-layout.pug
 
-include mixins/createProduct.pug
+include ../mixins/createProduct.pug
 
 block content
     
-    include includes/slider.pug
-
     .row.my-5
         if data.length > 0
             each product in data
