@@ -7,6 +7,7 @@ Learning series about nodejs
 - [Introduction](#introduction)
 - [Npm](#npm)
 - [Express](#express)
+- [Template Engine (Pug)](#template-engine%20-%20pug)
 
 ## Introduction
 
@@ -42,3 +43,29 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 ```
+
+> To serve any public file on web add this middleware into app.js
+
+```javascript
+app.use(express.static(path.join(__dirname, "/public")));
+```
+
+> To use body-parser npm package as a default add this middleware. Express supports usage of body-parser anywhere with `req.body` property
+
+```javascript
+app.use(bodyParser.urlencoded({ extended: false }));
+```
+
+## Template Engine - Pug
+
+> There are several popular templates engines like `ejs, pug, handlebars` \
+> Install npm package first with the command `npm i pug` \
+> Some configuration needed to use pug template engine, so add this codes into app.js
+
+```javascript
+app.set("view engine", "pug");
+app.set("views", "./views");
+```
+
+> Use `block [block_name]` to render block of codes into pug file \
+> Use `#{name}` to define a variable in the layout page
