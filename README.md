@@ -9,6 +9,8 @@ Learning series about nodejs
 - [Express](#express)
 - [Template Engine (Pug)](#template-engine-pug)
 - [Mvc](#mvc)
+- [Database Integration](#database-integration)
+  - [MySQL Integration](#mysql-integration)
 
 ## Introduction
 
@@ -76,4 +78,26 @@ app.set("views", "./views");
 
 ## Mvc
 
-> models, controllers and views directories added
+> Models, Controllers and Views directories added \
+> Clear sample of usage MVC has been shown in the Express file
+
+## Database Integration
+
+### MySQL Integration
+
+> Click [here](https://dev.mysql.com/downloads/installer/) to install MySQL Server and workbench \
+> For database connection added `utility` folder in Express directory \
+> Use `npm i mysql2` command to install mysql package \
+> Add **mysql2** package into app.js and run this sample code snippet to check whether connection is successful or not \
+> Old files for storage have preserved with `_memory` suffix \
+
+```javascript
+connection
+  .execute("select * from products")
+  .then((result) => {
+    console.log(result[0]);
+  })
+  .catch((err) => {
+    console.error(err.sqlMessage);
+  });
+```

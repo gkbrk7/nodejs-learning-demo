@@ -2,22 +2,17 @@ const Category = require('../models/category');
 const Product = require('../models/product');
 
 exports.getIndex = (req, res, next) => {
+    const products = Product.getProducts()
     const categories = Category.getAllCategories()
-
-    Product.getProducts()
-        .then(products => {
-            res.render("shop/index", { title: "Home Page", data: products[0], path: '/', categories: categories })
-        })
-        .catch(err => console.log(err))
+    // res.sendFile(path.join(__dirname, "../", "views", "index.html"))
+    res.render("shop/index", { title: "Home Page", data: products, path: '/', categories: categories })
 }
 
 exports.getProducts = (req, res, next) => {
+    const products = Product.getProducts()
     const categories = Category.getAllCategories()
-    Product.getProducts()
-        .then(products => {
-            res.render("shop/products", { title: "Products", data: products[0], path: '/products', categories: categories })
-        })
-        .catch(err => console.log(err))
+    // res.sendFile(path.join(__dirname, "../", "views", "index.html"))
+    res.render("shop/products", { title: "Products", data: products, path: '/products', categories: categories })
 }
 
 exports.getProduct = (req, res, next) => {

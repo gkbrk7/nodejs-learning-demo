@@ -2,10 +2,10 @@ const Product = require("../models/product")
 const Category = require('../models/category')
 
 exports.getProducts = (req, res, next) => {
-    const products = Product.getProducts()
-    // res.sendFile(path.join(__dirname, "../", "views", "add-product.html"))
-    res.render("admin/products", { title: "Admin Products", data: products, path: '/admin/products', action: req.query.action })
-    // next()
+    Product.getProducts()
+        .then(products => {
+            res.render("admin/products", { title: "Admin Products", data: products[0], path: '/admin/products', action: req.query.action })
+        }).catch(err => console.log(err))
 }
 
 exports.getAddProduct = (req, res, next) => {
