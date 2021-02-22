@@ -22,6 +22,14 @@ block content
                 textarea(name="description", cols="20", rows="5").form-control#description #{data.description}
 
         .form-group.row.my-2
+            label(for="categoryId").col-sm-2.col-form-label Description:
+            .col-sm-10
+                select(name="categoryId" style="text-transform: capitalize;").form-select#categoryId
+                    option(value="-1") Select Category
+                    each category in categories  
+                        option(value=`${category.id}` selected=data.categoryId==category.id ? true : false) #{category.name}
+
+        .form-group.row.my-2
             label(for="imageUrl").col-sm-2.col-form-label Image:
             .col-sm-10
                 input(type="text" name="imageUrl" value=`${data.imageUrl}`).form-control#image
