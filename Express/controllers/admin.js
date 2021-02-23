@@ -1,5 +1,6 @@
 const Product = require("../models/product")
 const Category = require('../models/category')
+const User = require("../models/user")
 
 exports.getProducts = (req, res, next) => {
     Product.findAll().then(products => {
@@ -14,9 +15,10 @@ exports.getAddProduct = (req, res, next) => {
 }
 
 exports.postAddProduct = (req, res, next) => {
+    const user = req.user
     const { name, price, imageUrl, description, categoryId } = req.body
-    Product.create({ name, price, imageUrl, description }).then(result => {
-        console.log(result)
+    
+    user.createProduct({ name, price, imageUrl, description, categoryId }).then(result => {
         res.redirect("/")
     }).catch(err => console.log(err))
 

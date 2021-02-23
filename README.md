@@ -136,3 +136,11 @@ sequelize.sync().then(() =>
 Product.belongsTo(Category);
 Category.hasMany(Product);
 ```
+
+> If two tables have relationship with each other, then `Sequelize` creates automatically combined functions like :
+
+```javascript
+category.createProduct(Product);
+```
+
+> This is valid for specific category object because it has relationship with Products. Syntax should be **object.[create/get]{Model + 's'}** ==> (i.e user.getProducts())
