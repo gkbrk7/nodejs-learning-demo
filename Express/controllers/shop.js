@@ -22,28 +22,29 @@ exports.getProducts = (req, res, next) => {
 }
 
 exports.getProduct = (req, res, next) => {
-    // Product.findByPk(req.params.id)
-    //     .then(product => {
-    //         // Category.findByPk(product.categoryId).then(category => {
-    //         res.render("shop/product-detail", { title: product.name, product: product, path: '/products' })
-    //         // }
-    //         // ).catch(err => console.log(err))
-    //     }).catch(err => console.log(err))
-
-    Product.findAll({
+    Product.findOne({
         where: {
             id: req.params.id
         }
-    }).then(products => {
-        res.render("shop/product-detail", { title: products[0].name, product: products[0], path: '/products' })
+    }).then(product => {
+        Category.findOne({
+            where: {
+                id: product.categoryId
+            }
+        }).then(category => {
+            res.render("shop/product-detail", { title: product.name, product: product, category: category, path: '/products' })
+        }).catch(err => console.log(err))
     }).catch(err => console.log(err))
 }
 
 exports.getProductsByCategories = (req, res, next) => {
-    const categoryId = req.params.id
-    Product.getProductsByCategoryId(categoryId).then(products => {
-        Category.getAllCategories().then(categories => {
-            res.render("shop/products", { title: "Products", data: products[0], path: '/products', selectedCategory: categoryId, categories: categories[0] })
+    Product.findAll({
+        where: {
+            categoryId: req.params.id
+        }
+    }).then(products => {
+        Category.findAll().then(categories => {
+            res.render("shop/products", { title: "Products", data: products, path: '/products', selectedCategory: req.params.id, categories: categories })
         }).catch(err => console.log(err))
     }).catch(err => console.log(err))
 }

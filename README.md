@@ -130,3 +130,9 @@ sequelize.sync().then(() =>
 ```
 
 > Sequelize provides the `create` method, which combines the `build` and `save` methods for adding data into database \
+> One-to-Many relationship in app.js before calling `sync()` method
+
+```javascript
+Product.belongsTo(Category);
+Category.hasMany(Product);
+```
