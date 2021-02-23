@@ -10,7 +10,8 @@ app.set("view engine", "pug")
 app.set("views", "./views")
 
 const adminRoutes = require("./routes/admin")
-const userRoutes = require("./routes/shop")
+const userRoutes = require("./routes/shop");
+const sequelize = require('./utility/database');
 
 
 
@@ -43,6 +44,12 @@ app.use(userRoutes)
 
 // app.set("title", "My Site")
 // console.log(app.get("title"))
+
+// sequelize
+//     .authenticate()
+//     .then(() => {
+//         console.log("connection successful")
+//     }).catch(err => console.log(err))
 
 app.use(errorController.get404Page)
 

@@ -11,6 +11,7 @@ Learning series about nodejs
 - [Mvc](#mvc)
 - [Database Integration](#database-integration)
   - [MySQL Integration](#mysql-integration)
+  - [Sequelizejs ORM Tool](#sequelizejs-orm-tool)
 
 ## Introduction
 
@@ -101,3 +102,30 @@ connection
     console.error(err.sqlMessage);
   });
 ```
+
+### Sequelizejs ORM Tool
+
+> An ORM (Object Relational Mapping) tool for MySQL is integrated \
+> `Sequelizejs` ORM tool used for MySQL in this project \
+> `Sequelizejs` supports Postgres, MySQL, MariaDB, SQLite and MSSQL as well \
+> Old connection file preseverd as `database_norm.js` in utility folder \
+> First, install `sequelizejs` package from npm with `npm i --save sequelize` command \
+> Examine sample create code for testing purposes \
+
+```javascript
+const Sequelize = require("sequelize");
+const sequelize = new Sequelize("postgres://user:pass@example.com:5432/dbname");
+
+const User = sequelize.define("user", {
+  username: Sequelize.STRING,
+  birthday: Sequelize.DATE,
+});
+
+sequelize.sync().then(() =>
+  User.create({
+    username: "johndoe",
+    birthday: new Date(1980, 6, 20),
+  }).then((john) => console.log(john.toJSON()))
+);
+```
+> 
