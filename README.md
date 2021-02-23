@@ -20,7 +20,7 @@ Learning series about nodejs
 
 ## Npm
 
-> `^major.minor.patch` npm packages versioning, `^` trackes the change of minor or patch part not major part so if any major update is available on a package, it is not installed the project\
+> `^major.minor.patch` npm packages versioning, `^` trackes the change of minor or patch part not major part so if any major update is available on a package, it is not installed to the project\
 > `npm i [package_name] --save-dev` npm packages will be installed as devDependencies. It is a local package but it is only for development purposes \
 > `npm -v` Gives the installed npm version \
 > `npm list -g --depth 0` Lists global npm packages on the machine \
@@ -85,7 +85,7 @@ app.set("views", "./views");
 
 ### MySQL Integration
 
-> Click [here](https://dev.mysql.com/downloads/installer/) to install MySQL Server and workbench \
+> Click [here](https://dev.mysql.com/downloads/installer/) to install for windows MySQL Server and workbench \
 > For database connection added `utility` folder in Express directory \
 > Use `npm i mysql2` command to install mysql package \
 > Add **mysql2** package into app.js and run this sample code snippet to check whether connection is successful or not \
