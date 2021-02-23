@@ -128,4 +128,5 @@ sequelize.sync().then(() =>
   }).then((john) => console.log(john.toJSON()))
 );
 ```
-> 
+
+> Sequelize provides the `create` method, which combines the `build` and `save` methods for adding data into database \

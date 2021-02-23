@@ -2,41 +2,38 @@ const Product = require("../models/product")
 const Category = require('../models/category')
 
 exports.getProducts = (req, res, next) => {
-    Product.getProducts()
-        .then(products => {
-            res.render("admin/products", { title: "Admin Products", data: products[0], path: '/admin/products', action: req.query.action })
-        }).catch(err => console.log(err))
+    Product.findAll().then(products => {
+        res.render("admin/products", { title: "Admin Products", data: products, path: '/admin/products', action: req.query.action })
+    }).catch(err => console.log(err))
 }
 
 exports.getAddProduct = (req, res, next) => {
-    const products = Product.getProducts()
-    Product.getProducts().then(products => {
-        Category.getAllCategories().then(categories => {
-            res.render("admin/add-product", { title: "Add New Product", data: products[0], categories: categories[0], path: '/admin/add-product' })
-        }).catch(err => console.log(err))
-    }).catch(err => console.log(err))
-    // res.sendFile(path.join(__dirname, "../", "views", "add-product.html"))
-    // next()
+    res.render("admin/add-product", { title: "Add New Product", path: '/admin/add-product' })
 }
 
 exports.postAddProduct = (req, res, next) => {
-    const data = req.body
-    const product = new Product(data.name, data.price, data.description, data.categoryId, data.imageUrl)
+    const { name, price, imageUrl, description } = req.body
+    // Product.create({ name, price, imageUrl, description }).then(result => {
+    //     console.log(result)
+    //     res.redirect("/")
+    // }).catch(err => console.log(err))
 
-    product.saveProduct().then(() => {
+    const product = Product.build({ name, price, imageUrl, description })
+    product.save().then(result => {
+        console.log(result)
         res.redirect("/")
     }).catch(err => console.log(err))
 }
 
 exports.getEditProduct = (req, res, next) => {
-    Product.getById(req.params.id)
+    Product.findByPk(req.params.id)
         .then(product => {
-            Category.getAllCategories().then(categories => {
-                res.render("admin/edit-product", { title: "Edit Product", data: product[0][0], categories: categories[0], path: '/admin/products' })
+            Category.findAll().then(categories => {
+                res.render("admin/edit-product", { title: "Edit Product", data: product, categories: categories, path: '/admin/products' })
             }).catch(err => console.log(err))
         }).catch(err => console.log(err))
-    // res.sendFile(path.join(__dirname, "../", "views", "add-product.html"))
-    // next()
+
+    
 }
 
 exports.postEditProduct = (req, res, next) => {

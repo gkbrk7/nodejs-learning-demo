@@ -20,13 +20,13 @@ block content
             .col-sm-10
                 textarea(name="description", cols="20", rows="5").form-control#description
 
-        .form-group.row.my-2
-            label(for="categoryId").col-sm-2.col-form-label Description:
-            .col-sm-10
-                select(name="categoryId" style="text-transform: capitalize;").form-select#categoryId
-                    option(value="-1") Select Category
-                    each category in categories  
-                        option(value=`${category.id}`) #{category.name}
+        //- .form-group.row.my-2
+        //-     label(for="categoryId").col-sm-2.col-form-label Description:
+        //-     .col-sm-10
+        //-         select(name="categoryId" style="text-transform: capitalize;").form-select#categoryId
+        //-             option(value="-1") Select Category
+        //-             each category in categories  
+        //-                 option(value=`${category.id}`) #{category.name}
 
         .form-group.row.my-2
             label(for="imageUrl").col-sm-2.col-form-label Image:
