@@ -11,7 +11,9 @@ Learning series about nodejs
 - [Mvc](#mvc)
 - [Database Integration](#database-integration)
   - [MySQL Integration](#mysql-integration)
-  - [Sequelizejs ORM Tool](#sequelizejs-orm-tool)
+    - [Sequelizejs ORM Tool](#sequelizejs-orm-tool)
+  - [MongoDB Integration](#mongodb-integration)
+    - [Sequelizejs ORM Tool](#sequelizejs-orm-tool)
 
 ## Introduction
 
@@ -103,7 +105,7 @@ connection
   });
 ```
 
-### Sequelizejs ORM Tool
+#### Sequelizejs ORM Tool
 
 > An ORM (Object Relational Mapping) tool for MySQL is integrated \
 > `Sequelizejs` ORM tool used for MySQL in this project \
@@ -145,3 +147,14 @@ category.createProduct(Product);
 
 > This is valid for specific category object because it has relationship with Products.\
 > Syntax should be **object.[create/get]{Model + 's'}** ==> (i.e user.getProducts())
+
+### MongoDB Integration
+
+> Install community edition on official website \
+> Create data directory for mongodb and place it into ` C:\\data\\db\\` \
+> Add `mongod` server to path in environment variables \
+> For cloud storage canbe used `MongoDb Atlas`. It gives 512 mb cloud storage \
+> Before mysql integration and its connection js preserved as `database_mysql.js` \
+> Install mongodb from npm `npm i mongodb` \
+
+#### Mongoose ORM Tool
