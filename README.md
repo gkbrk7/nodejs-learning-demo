@@ -13,7 +13,7 @@ Learning series about nodejs
   - [MySQL Integration](#mysql-integration)
     - [Sequelizejs ORM Tool](#sequelizejs-orm-tool)
   - [MongoDB Integration](#mongodb-integration)
-    - [Sequelizejs ORM Tool](#sequelizejs-orm-tool)
+    - [Mongoose ORM Tool](#mongoose-orm-tool)
 
 ## Introduction
 

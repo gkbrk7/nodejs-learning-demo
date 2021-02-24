@@ -4,7 +4,7 @@ mixin createProduct(product)
             img(src=`/img/${product.imageUrl}` alt=`${product.description}`).card-img-top
             .card-body
                 h4.card-title
-                    a(href=`/products/${product.id}`) #{product.name}
+                    a(href=`/products/${product._id}`) #{product.name}
 
                 small.text-muted
                     i.fas.fa-lira-sign #{product.price}
@@ -12,7 +12,7 @@ mixin createProduct(product)
             .card-footer.d-flex.justify-content-around
                 
                 form(action="/cart" method="POST")
-                    input(type="hidden" value=`${product.id}` name="id")
+                    input(type="hidden" value=`${product._id}` name="id")
                     button(type="submit").btn.btn-outline-success.btn-sm.mr-3 Add to Cart 
 
-                a(href=`/products/${product.id}`).btn.btn-outline-primary.btn-sm.ml-3 See Detail
+                a(href=`/products/${product._id}`).btn.btn-outline-primary.btn-sm.ml-3 See Detail

@@ -20,5 +20,5 @@ const getdb = () => {
     if (_db) return _db
     throw 'No Database Instance'
 }
-module.exports = mongoConnect
-module.exports = getdb
+module.exports.mongoConnect = mongoConnect
+module.exports.getdb = getdb

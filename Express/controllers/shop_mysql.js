@@ -1,22 +1,39 @@
-// const Category = require('../models/category');
+const Category = require('../models/category');
 const Product = require('../models/product');
 
 exports.getIndex = (req, res, next) => {
-    Product.findAll().then(products => {
-        res.render("shop/index", { title: "Home Page", data: products, path: '/' })
+    Product.findAll({
+        attributes: ['id', 'name', 'price', 'imageUrl']
+    }).then(products => {
+        Category.findAll().then(categories => {
+            res.render("shop/index", { title: "Home Page", data: products, path: '/', categories: categories })
+        }).catch(err => console.log(err))
     }).catch(err => console.log(err))
 }
 
 exports.getProducts = (req, res, next) => {
-    Product.findAll().then(products => {
-        res.render("shop/products", { title: "Products", data: products, path: '/products' })
+    Product.findAll({
+        attributes: ['id', 'name', 'price', 'imageUrl']
+    }).then(products => {
+        Category.findAll().then(categories => {
+            res.render("shop/products", { title: "Products", data: products, path: '/products', categories: categories })
+        }).catch(err => console.log(err))
     }).catch(err => console.log(err))
-
 }
 
 exports.getProduct = (req, res, next) => {
-    Product.findById(req.params.id).then(product => {
-        res.render("shop/product-detail", { title: product.name, product: product, path: '/products' })
+    Product.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(product => {
+        Category.findOne({
+            where: {
+                id: product.categoryId
+            }
+        }).then(category => {
+            res.render("shop/product-detail", { title: product.name, product: product, category: category, path: '/products' })
+        }).catch(err => console.log(err))
     }).catch(err => console.log(err))
 }
 
