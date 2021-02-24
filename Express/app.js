@@ -17,6 +17,8 @@ const Product = require("./models/product")
 const User = require("./models/user")
 const Cart = require("./models/cart")
 const CartItem = require("./models/cartItem")
+const Order = require("./models/order")
+const OrderItem = require("./models/orderItem")
 // app.get("/", (req, res) => {
 //     res.send("Hello World")
 // })
@@ -88,7 +90,13 @@ Cart.belongsTo(User)
 Cart.belongsToMany(Product, { through: CartItem })
 Product.belongsToMany(Cart, { through: CartItem })
 
+Order.belongsTo(User)
+User.hasMany(Order)
 
+Order.belongsToMany(Product, { through: OrderItem })
+Product.belongsToMany(Order, { through: OrderItem })
+
+let _user;
 sequelize
     // .sync({ force: true })
     .sync()
@@ -99,6 +107,14 @@ sequelize
             }
             return user
         }).then((user) => {
+            _user = user
+            return user.getCart()
+        }).then(cart => {
+            if (!cart) {
+                return _user.createCart()
+            }
+            return cart
+        }).then(() => {
             Category.count().then(count => {
                 if (count === 0) {
                     Category.bulkCreate([

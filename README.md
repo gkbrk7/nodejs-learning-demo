@@ -143,4 +143,5 @@ Category.hasMany(Product);
 category.createProduct(Product);
 ```
 
-> This is valid for specific category object because it has relationship with Products. Syntax should be **object.[create/get]{Model + 's'}** ==> (i.e user.getProducts())
+> This is valid for specific category object because it has relationship with Products.\
+> Syntax should be **object.[create/get]{Model + 's'}** ==> (i.e user.getProducts())

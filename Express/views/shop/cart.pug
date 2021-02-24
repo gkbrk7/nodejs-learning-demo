@@ -1,4 +1,41 @@
 extends ../layouts/main-layout.pug
 
 block content
+    if (action !== "undefined" && action === "edit")
+        div(role="alert").alert.alert-success The product has been updated successfully
+    else if(action !== "undefined" && action === "delete")
+        div(role="alert").alert.alert-danger The product has been deleted successfully
 
+    if data.length > 0
+        table.table.table-bordered 
+            thead 
+                tr 
+                    th(style="width: 100px;") Image
+                    th Product Name 
+                    th(style="width: 150px;") Price
+                    th Quantity
+                    th(style="width: 133px;") 
+            tbody 
+                each product in data
+                    tr
+                        td
+                            img(src=`/img/${product.imageUrl}` width="80")
+                        td #{product.name}
+                        td #{product.price} TL
+                        td #{product.cartItem.quantity}
+                        td 
+                            form(action="/delete-cartitem" method="POST")
+                                input(type="hidden" name="id" value=`${product.id}`)
+                                button(type="submit").btn.btn-danger.btn-sm Delete
+            tfoot 
+                tr 
+                    td(colspan=2) Total:
+                    td #{total.price} TL
+                    td #{total.quantity}
+        .text-center
+            a(href="/").btn.btn-primary Go to Shop 
+            form(action="/create-order" method="POST")
+                button(type="submit").btn.btn-success.mx-2 Go to Checkout 
+
+    else 
+        h1 No Products Listed
