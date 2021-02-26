@@ -1,0 +1,20 @@
+extends ../layouts/main-layout.pug
+
+block styles 
+    link(rel="stylesheet", href="/css/forms.css")
+
+block content 
+    form(action="/admin/add-category" method="POST")
+        .form-group.row.my-2
+            label(for="name").col-sm-2.col-form-label Category Name:
+            .col-sm-10
+                input(type="text" name="name").form-control#name
+                
+        .form-group.row.my-2
+            label(for="description").col-sm-2.col-form-label Description:
+            .col-sm-10
+                textarea(name="description", cols="20", rows="5").form-control#description
+
+        .form-group.row
+            .offset-2.mt-2
+                input(type="submit" value="Add Category").btn.btn-primary

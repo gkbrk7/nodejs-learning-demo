@@ -1,0 +1,29 @@
+extends ../layouts/main-layout.pug
+
+block content
+    if (action !== "undefined" && action === "create")
+        div(role="alert").alert.alert-success The product has been created successfully
+    else if (action !== "undefined" && action === "edit")
+        div(role="alert").alert.alert-info The product has been updated successfully
+    else if(action !== "undefined" && action === "delete")
+        div(role="alert").alert.alert-danger The product has been deleted successfully
+
+    if data.length > 0
+        table.table.table-bordered 
+            thead 
+                tr 
+                    th Category Nam
+                    th Description 
+                    th(style="width: 133px;") 
+            tbody 
+                each category in data
+                    tr
+                        td #{category.name}
+                        td #{category.description}
+                        td 
+                            a.btn.btn-primary.btn-sm(href=`/admin/categories/${category._id}` style="margin-right: 5px;") Edit
+                            form(action="/admin/delete-category" method="POST")
+                                input(type="hidden" name="id" value=`${category._id}`)
+                                button(type="submit").btn.btn-danger.btn-sm Delete
+    else 
+        h1 No Categories Listed
