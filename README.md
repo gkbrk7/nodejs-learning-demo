@@ -24,9 +24,10 @@ Learning series about nodejs
 
 ## ES6 Features
 
-> Some new features of ecmascript 6 added \
+> Some new features of ES6 added \
 > There features explained by comparing the ES5 \
-> some of ES6 features will be used in express project.
+> All the necessary files in `ES6-Features` directory \
+> Some of ES6 features will be used in express project.
 
 ## Npm
 
