@@ -5,6 +5,7 @@ Learning series about nodejs
 ### Table of Contents
 
 - [Introduction](#introduction)
+- [ES6Features](#es6-features)
 - [Npm](#npm)
 - [Express](#express)
 - [Template Engine (Pug)](#template-engine-pug)
@@ -20,6 +21,12 @@ Learning series about nodejs
 > All the necessary files are in Introduction directory \
 > `node_modules` including `fs, path, url, events, http, querystring` mentioned in this section \
 > Usage of some modules explained with a simple example
+
+## ES6 Features
+
+> Some new features of ecmascript 6 added \
+> There features explained by comparing the ES5 \
+> some of ES6 features will be used in express project.
 
 ## Npm
 
