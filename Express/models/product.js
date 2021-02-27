@@ -40,6 +40,12 @@ class Product {
         const db = getDb()
         return db.collection('products').deleteOne({ _id: new mongodb.ObjectID(id) }).then(result => console.log(result)).catch(err => console.log(err))
     }
+
+    static findByCategoryId(id) {
+        const db = getDb()
+        // return db.collection('products').find({ categories: id })
+        return db.collection('products').find({ categories: id }).toArray().then(products => products).catch(err => console.log(err))
+    }
 }
 
 module.exports = Product

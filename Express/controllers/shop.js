@@ -1,15 +1,19 @@
-// const Category = require('../models/category');
+const Category = require('../models/category');
 const Product = require('../models/product');
 
 exports.getIndex = (req, res, next) => {
     Product.findAll().then(products => {
-        res.render("shop/index", { title: "Home Page", data: products, path: '/' })
+        Category.findAll().then(categories => {
+            res.render("shop/index", { title: "Home Page", data: products, categories: categories, path: '/' })
+        })
     }).catch(err => console.log(err))
 }
 
 exports.getProducts = (req, res, next) => {
     Product.findAll().then(products => {
-        res.render("shop/products", { title: "Products", data: products, path: '/products' })
+        Category.findAll().then(categories => {
+            res.render("shop/products", { title: "Products", data: products, categories: categories, path: '/products' })
+        })
     }).catch(err => console.log(err))
 
 }
@@ -21,15 +25,15 @@ exports.getProduct = (req, res, next) => {
 }
 
 exports.getProductsByCategories = (req, res, next) => {
-    Product.findAll({
-        where: {
-            categoryId: req.params.id
-        }
+    const categoryId = req.params.id
+    const model = []
+
+    Category.findAll().then(categories => {
+        model.categories = categories
+        return Product.findByCategoryId(categoryId)
     }).then(products => {
-        Category.findAll().then(categories => {
-            res.render("shop/products", { title: "Products", data: products, path: '/products', selectedCategory: req.params.id, categories: categories })
-        }).catch(err => console.log(err))
-    }).catch(err => console.log(err))
+        res.render("shop/products", { title: "Products", data: products, path: '/products', selectedCategory: categoryId, categories: model.categories })
+    })
 }
 
 exports.getProductDetails = (req, res, next) => {
