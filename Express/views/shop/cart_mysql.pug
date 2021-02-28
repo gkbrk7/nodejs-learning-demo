@@ -22,10 +22,10 @@ block content
                             img(src=`/img/${product.imageUrl}` width="80")
                         td #{product.name}
                         td #{product.price} TL
-                        td #{product.quantity}
+                        td #{product.cartItem.quantity}
                         td 
                             form(action="/delete-cartitem" method="POST")
-                                input(type="hidden" name="id" value=`${product._id}`)
+                                input(type="hidden" name="id" value=`${product.id}`)
                                 button(type="submit").btn.btn-danger.btn-sm Delete
             tfoot 
                 tr 
