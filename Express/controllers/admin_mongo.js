@@ -2,22 +2,21 @@ const Product = require("../models/product")
 const Category = require("../models/category")
 
 exports.getProducts = (req, res, next) => {
-    Product
-        .find()
-        // .find({name : "Iphone 6", price : 3500}).limit(10).sort({ name: -1 }).select({ name: 1, price: 1 })
-        .then(products => {
-            res.render("admin/products", { title: "Admin Products", data: products, path: '/admin/products', action: req.query.action })
-        }).catch(err => console.log(err))
+    Product.findAll().then(products => {
+        res.render("admin/products", { title: "Admin Products", data: products, path: '/admin/products', action: req.query.action })
+    }).catch(err => console.log(err))
 }
 
 exports.getAddProduct = (req, res, next) => {
-    res.render("admin/add-product", { title: "Add New Product", path: '/admin/add-product' })
+    Category.findAll().then(categories => {
+        res.render("admin/add-product", { title: "Add New Product", categories: categories, path: '/admin/add-product' })
+    }).catch(err => console.log(err))
 }
 
 exports.postAddProduct = (req, res, next) => {
     const { id, name, price, description, imageUrl, categoryIds } = req.body
 
-    const product = new Product({ id, name, price, description, imageUrl, categoryIds })
+    const product = new Product(id, name, price, description, imageUrl, categoryIds, req.user._id)
     product.save().then(() => {
         res.redirect("/admin/products")
     }).catch(err => console.log(err))

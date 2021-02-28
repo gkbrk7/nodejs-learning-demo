@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require("body-parser")
 const errorController = require('./controllers/errors');
-const mongoose = require('mongoose')
+const mongoConnect = require("./utility/database").mongoConnect
 const path = require('path');
 const User = require('./models/user')
 
@@ -17,17 +17,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, "/public")))
 
 
-// app.use((req, res, next) => {
-//     User.findByUserName('gokberkyildirim').then(user => {
-//         req.user = new User(user._id, user.name, user.email, user.cart)
-//         next()
-//     }).catch(err => console.log(err))
-// })
+app.use((req, res, next) => {
+    User.findByUserName('gokberkyildirim').then(user => {
+        req.user = new User(user._id, user.name, user.email, user.cart)
+        next()
+    }).catch(err => console.log(err))
+})
 app.use("/admin", adminRoutes)
 app.use(userRoutes)
 
 app.use(errorController.get404Page)
-/*
+
 mongoConnect(() => {
     User.findByUserName('gokberkyildirim').then(user => {
         if (!user) {
@@ -40,9 +40,3 @@ mongoConnect(() => {
         app.listen(3000)
     }).catch(err => console.log(err))
 })
-*/
-
-mongoose.connect('mongodb://localhost/node-app', { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
-    console.log('Connected MongoDB')
-    app.listen(3000)
-}).catch(err => console.log(err))

@@ -163,6 +163,53 @@ category.createProduct(Product);
 > Add `mongod` server to path in environment variables \
 > For cloud storage canbe used `MongoDb Atlas`. It gives 512 mb cloud storage \
 > Before mysql integration and its connection js preserved as `database_mysql.js` \
-> Install mongodb from npm `npm i mongodb` \
+> Install mongodb from npm `npm i mongodb`
 
 #### Mongoose ORM Tool
+
+> Install mongoose ORM from npm `npm i mongoose` \
+> Integration code sample of mongoose like this \
+
+```javascript
+const mongoose = require("mongoose");
+
+mongoose
+  .connect("mongodb://localhost/node-app", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected MongoDB");
+    app.listen(3000);
+  })
+  .catch((err) => console.log(err));
+```
+
+> To make some CRUD operation on the mongodb with mongoose ORM, define schema like this
+
+```javascript
+const productSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  description: String,
+  imageUrl: String,
+  date: {
+    type: Date,
+    default: Date.now(),
+  },
+});
+```
+
+> After definition of the schema create a database model for the usage of the collection with defined schema like below
+
+```javascript
+module.exports = mongoose.model("Product", productSchema);
+```
+
+>
