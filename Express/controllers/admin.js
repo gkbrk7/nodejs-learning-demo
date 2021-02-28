@@ -8,13 +8,15 @@ exports.getProducts = (req, res, next) => {
 }
 
 exports.getAddProduct = (req, res, next) => {
-    res.render("admin/add-product", { title: "Add New Product", path: '/admin/add-product' })
+    Category.findAll().then(categories => {
+        res.render("admin/add-product", { title: "Add New Product", categories: categories, path: '/admin/add-product' })
+    }).catch(err => console.log(err))
 }
 
 exports.postAddProduct = (req, res, next) => {
-    const { id, name, price, imageUrl, description } = req.body
+    const { id, name, price, description, imageUrl, categoryIds } = req.body
 
-    const product = new Product(id, name, price, description, imageUrl, req.user._id)
+    const product = new Product(id, name, price, description, imageUrl, categoryIds, req.user._id)
     product.save().then(() => {
         res.redirect("/admin/products")
     }).catch(err => console.log(err))
@@ -40,7 +42,7 @@ exports.getEditProduct = (req, res, next) => {
 
 exports.postEditProduct = (req, res, next) => {
     const { id, name, price, description, imageUrl, categoryIds } = req.body
-    const product = new Product(id, name, price, description, imageUrl, categoryIds)
+    const product = new Product(id, name, price, description, imageUrl, categoryIds, req.user._id)
     product.save().then(() => {
         res.redirect("/admin/products?action=edit")
     }).catch(err => console.log(err))

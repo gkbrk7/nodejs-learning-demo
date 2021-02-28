@@ -2,11 +2,12 @@ const getDb = require("../utility/database").getdb
 const mongodb = require('mongodb')
 
 class Product {
-    constructor(id, name, price, description, imageUrl, categories) {
+    constructor(id, name, price, description, imageUrl, categories, userId) {
         this._id = id ? new mongodb.ObjectID(id) : null
         this.name = name
         this.price = price
         this.description = description
+        this.userId = userId
         this.categories = (categories && Array.isArray(categories)) ? categories : Array.of(categories)
         this.imageUrl = imageUrl
     }

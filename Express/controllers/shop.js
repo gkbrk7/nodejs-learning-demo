@@ -71,7 +71,7 @@ exports.deleteCartItem = (req, res, next) => {
 }
 
 exports.getOrders = (req, res, next) => {
-    req.user.getOrders({ include: ["products"] }).then(orders => {
+    req.user.getOrders().then(orders => {
         res.render("shop/orders", { title: "Orders", orders: orders, path: '/orders' })
     }).catch(err => console.log(err))
 }
