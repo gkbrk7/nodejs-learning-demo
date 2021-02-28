@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, "/public")))
 
 app.use((req, res, next) => {
     User.findByUserName('gokberkyildirim').then(user => {
-        req.user = new User(user._id, user.name, user.email)
+        req.user = new User(user._id, user.name, user.email, user.cart)
         next()
     }).catch(err => console.log(err))
 })
