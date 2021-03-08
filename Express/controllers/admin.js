@@ -25,32 +25,37 @@ exports.postAddProduct = (req, res, next) => {
 
 exports.getEditProduct = (req, res, next) => {
     Product.findById(req.params.id).then(product => {
-        Category.findAll().then(categories => {
-            categories = categories.map(category => {
-                if (product.categories) {
-                    product.categories.find(item => {
-                        if (item == category._id) {
-                            category.selected = true
-                        }
-                    })
-                }
-                return category
-            })
-            res.render("admin/edit-product", { title: "Edit Product", data: product, categories: categories, path: '/admin/products' })
-        })
+        res.render("admin/edit-product", { title: "Edit Product", data: product, path: '/admin/products' })
     }).catch(err => console.log(err))
 }
 
 exports.postEditProduct = (req, res, next) => {
+    // query first
     const { id, name, price, description, imageUrl, categoryIds } = req.body
-    const product = new Product(id, name, price, description, imageUrl, categoryIds, req.user._id)
-    product.save().then(() => {
+    // Product.findById(id).then(product => {
+    //     product.name = name
+    //     product.price = price
+    //     product.imageUrl = imageUrl
+    //     product.description = description
+    //     return product.save()
+    // }).then(() => {
+    //     res.redirect("/admin/products?action=edit")
+    // }).catch(err => console.log(err))
+    // update first
+    Product.updateOne({ _id: id }, {
+        $set: {
+            name: name,
+            price: price,
+            imageUrl: imageUrl,
+            description: description
+        }
+    }).then(() => {
         res.redirect("/admin/products?action=edit")
     }).catch(err => console.log(err))
 }
 
 exports.postDeleteProduct = (req, res, next) => {
-    Product.deleteById(req.body.id).then(() => {
+    Product.deleteOne({ _id: req.body.id }).then(() => {
         res.redirect("/admin/products?action=delete")
     }).catch(err => console.log(err))
 }
