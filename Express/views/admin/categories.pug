@@ -2,11 +2,11 @@ extends ../layouts/main-layout.pug
 
 block content
     if (action !== "undefined" && action === "create")
-        div(role="alert").alert.alert-success The product has been created successfully
+        div(role="alert").alert.alert-success The category has been created successfully
     else if (action !== "undefined" && action === "edit")
-        div(role="alert").alert.alert-info The product has been updated successfully
+        div(role="alert").alert.alert-info The category has been updated successfully
     else if(action !== "undefined" && action === "delete")
-        div(role="alert").alert.alert-danger The product has been deleted successfully
+        div(role="alert").alert.alert-danger The category has been deleted successfully
 
     if data.length > 0
         table.table.table-bordered 

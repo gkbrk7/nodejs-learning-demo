@@ -2,13 +2,11 @@ const Category = require('../models/category');
 const Product = require('../models/product');
 
 exports.getIndex = (req, res, next) => {
-    Product.find().then(products => {
-        return products
-    }).then(products => {
-        Category.find().then(categories => {
-            res.render("shop/index", { title: "Home Page", data: products, categories: categories, path: '/' })
-        })
-        // res.render("shop/index", { title: "Home Page", data: products, path: '/' })
+    Product.findAll().then(products => {
+        res.render("shop/index", { title: "Home Page", data: products, path: '/' })
+        // Category.findAll().then(categories => {
+        //     res.render("shop/index", { title: "Home Page", data: products, categories: categories, path: '/' })
+        // })
     }).catch(err => console.log(err))
 }
 
@@ -22,7 +20,7 @@ exports.getProducts = (req, res, next) => {
     // in 
     // nin (not in)
     Product
-        .find()
+        .findAll()
         // .find({ price: { $eq: 2000 } })
         // .find({ price: { $ne: 2000 } })
         // .find({ price: { $gt: 2000 } })
@@ -42,14 +40,10 @@ exports.getProducts = (req, res, next) => {
         // contains
         // .find({ name: /.*Samsung.*/ })
         .then(products => {
-            return products
+            res.render("shop/products", { title: "Products", data: products, path: '/products' })
             // Category.findAll().then(categories => {
             //     res.render("shop/products", { title: "Products", data: products, categories: categories, path: '/products' })
             // })
-        }).then(products => {
-            Category.find().then(categories => {
-                res.render("shop/products", { title: "Products", data: products, categories: categories, path: '/products' })
-            })
         }).catch(err => console.log(err))
 }
 

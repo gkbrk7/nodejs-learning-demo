@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, "/public")))
 
 
 app.use((req, res, next) => {
-    User.findOne('gokberkyildirim').then(user => {
+    User.findOne({ name: 'gokberkyildirim' }).then(user => {
         req.user = user
         next()
     }).catch(err => console.log(err))
