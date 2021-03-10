@@ -24,7 +24,7 @@ const productSchema = mongoose.Schema({
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Category',
-            required: true
+            required: false
         }
     ]
     // tags : [String] // tags : [phone, tv]

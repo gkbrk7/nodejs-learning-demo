@@ -1,0 +1,26 @@
+extends ../layouts/main-layout.pug
+
+block styles 
+    link(rel="stylesheet", href="/css/forms.css")
+
+block content 
+    form(action="/register" method="POST")
+
+        .form-group.row.my-2
+            label(for="name").col-sm-2.col-form-label Name:
+            .col-sm-10
+                input(type="text" name="name").form-control#name
+
+        .form-group.row.my-2
+            label(for="email").col-sm-2.col-form-label Email:
+            .col-sm-10
+                input(type="text" name="email").form-control#email
+                
+        .form-group.row.my-2
+            label(for="password").col-sm-2.col-form-label Password:
+            .col-sm-10
+                input(type="password" name="password").form-control#password
+
+        .form-group.row
+            .offset-2.mt-2
+                input(type="submit" value="Register").btn.btn-primary

@@ -12,6 +12,7 @@ app.set("views", "./views")
 
 const adminRoutes = require("./routes/admin")
 const userRoutes = require("./routes/shop");
+const accountRoutes = require("./routes/account");
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, "/public")))
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 })
 app.use("/admin", adminRoutes)
 app.use(userRoutes)
+app.use(accountRoutes)
 
 app.use(errorController.get404Page)
 /*

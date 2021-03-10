@@ -15,6 +15,7 @@ Learning series about nodejs
     - [Sequelizejs ORM Tool](#sequelizejs-orm-tool)
   - [MongoDB Integration](#mongodb-integration)
     - [Mongoose ORM Tool](#mongoose-orm-tool)
+- [Authentication](#authentication)
 
 ## Introduction
 
@@ -212,4 +213,4 @@ const productSchema = mongoose.Schema({
 module.exports = mongoose.model("Product", productSchema);
 ```
 
->
+## Authentication
