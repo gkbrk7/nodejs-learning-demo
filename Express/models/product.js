@@ -30,4 +30,6 @@ const productSchema = mongoose.Schema({
     // tags : [String] // tags : [phone, tv]
 })
 
+
+
 module.exports = mongoose.model('Product', productSchema)

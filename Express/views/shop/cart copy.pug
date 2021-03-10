@@ -19,13 +19,13 @@ block content
                 each product in data
                     tr
                         td
-                            img(src=`/img/${product.productId.imageUrl}` width="80")
-                        td #{product.productId.name}
-                        td #{product.productId.price} TL
+                            img(src=`/img/${product.imageUrl}` width="80")
+                        td #{product.name}
+                        td #{product.price} TL
                         td #{product.quantity}
                         td 
                             form(action="/delete-cartitem" method="POST")
-                                input(type="hidden" name="productId" value=`${product.productId._id}`)
+                                input(type="hidden" name="id" value=`${product._id}`)
                                 button(type="submit").btn.btn-danger.btn-sm Delete
             tfoot 
                 tr 

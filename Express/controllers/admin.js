@@ -14,14 +14,16 @@ exports.getProducts = (req, res, next) => {
 }
 
 exports.getAddProduct = (req, res, next) => {
-    res.render("admin/add-product", { title: "Add New Product", path: '/admin/add-product' })
+    Category.find().then(categories => {
+        res.render("admin/add-product", { title: "Add New Product", categories: categories, path: '/admin/add-product' })
+    })
 }
 
 exports.postAddProduct = (req, res, next) => {
-    const { id, name, price, description, imageUrl, categoryIds } = req.body
+    const { name, price, description, imageUrl, categoryIds: categories } = req.body
     const userId = req.user
 
-    const product = new Product({ id, name, price, description, imageUrl, categoryIds, userId })
+    const product = new Product({ name, price, description, imageUrl, userId, categories })
     product.save().then(() => {
         res.redirect("/admin/products")
     }).catch(err => console.log(err))
@@ -29,24 +31,24 @@ exports.postAddProduct = (req, res, next) => {
 
 exports.getEditProduct = (req, res, next) => {
     Product.findById(req.params.id)
-    // .populate('categories', 'name')
-    .then(product => {
-        return product
-    }).then(product => {
-        Category.find().then(categories => {
-            categories = categories.map(category => {
-                if (product.categories){
-                    product.categories.find(item => {
-                        if (item.toString() === category._id.toString()){
-                            category.selected = true
-                        }
-                    })
-                }
-                return category
+        // .populate('categories', 'name')
+        .then(product => {
+            return product
+        }).then(product => {
+            Category.find().then(categories => {
+                categories = categories.map(category => {
+                    if (product.categories) {
+                        product.categories.find(item => {
+                            if (item.toString() === category._id.toString()) {
+                                category.selected = true
+                            }
+                        })
+                    }
+                    return category
+                })
+                res.render("admin/edit-product", { title: "Edit Product", data: product, categories: categories, path: '/admin/products' })
             })
-            res.render("admin/edit-product", { title: "Edit Product", data: product, categories: categories, path: '/admin/products' })
-        })
-    }).catch(err => console.log(err))
+        }).catch(err => console.log(err))
 }
 
 exports.postEditProduct = (req, res, next) => {

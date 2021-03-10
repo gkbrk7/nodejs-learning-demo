@@ -1,5 +1,6 @@
 const Category = require('../models/category');
 const Product = require('../models/product');
+const user = require('../models/user');
 
 exports.getIndex = (req, res, next) => {
     Product.find().then(products => {
@@ -66,9 +67,11 @@ exports.getProductsByCategories = (req, res, next) => {
     const categoryId = req.params.id
     const model = []
 
-    Category.findAll().then(categories => {
+    Category.find().then(categories => {
         model.categories = categories
-        return Product.findByCategoryId(categoryId)
+        return Product.find({
+            categories: categoryId
+        })
     }).then(products => {
         res.render("shop/products", { title: "Products", data: products, path: '/products', selectedCategory: categoryId, categories: model.categories })
     })
@@ -82,13 +85,14 @@ exports.getProductDetails = (req, res, next) => {
 
 
 exports.getCart = (req, res, next) => {
-    req.user.getCart().then(products => {
+    req.user.populate('cart.items.productId').execPopulate().then(user => {
         let price = 0, quantity = 0
-        products.forEach(product => {
-            price += product.price * product.quantity
+        user.cart.items.forEach(product => {
+            price += product.productId.price * product.quantity
             quantity += product.quantity
         })
-        res.render("shop/cart", { title: "Cart", data: products, total: { price, quantity }, path: '/cart' })
+        console.log(user.cart.items)
+        res.render("shop/cart", { title: "Cart", data: user.cart.items, total: { price, quantity }, path: '/cart' })
     }).catch(err => console.log(err))
 }
 
@@ -102,7 +106,7 @@ exports.postCart = (req, res, next) => {
 }
 
 exports.deleteCartItem = (req, res, next) => {
-    const productId = req.body.id
+    const productId = req.body.productId
     req.user.deleteCartItem(productId).then(() => {
         res.redirect("/cart")
     })

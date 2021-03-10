@@ -27,7 +27,6 @@ block content
                 each category in categories 
                     input(type="checkbox" id=`${category.name}` name="categoryIds" value=`${category._id}` checked=category.selected).mx-2
                     label(for=`${category.name}`) #{category.name}
-                    | #{category.name}
 
         .form-group.row.my-2
             label(for="imageUrl").col-sm-2.col-form-label Image:
