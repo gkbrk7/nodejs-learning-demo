@@ -8,7 +8,7 @@ exports.getIndex = (req, res, next) => {
         return products
     }).then(products => {
         Category.find().then(categories => {
-            res.render("shop/index", { title: "Home Page", data: products, categories: categories, path: '/' })
+            res.render("shop/index", { title: "Home Page", data: products, categories: categories, path: '/', isAuthenticated: req.session.isAuthenticated })
         })
         // res.render("shop/index", { title: "Home Page", data: products, path: '/' })
     }).catch(err => console.log(err))

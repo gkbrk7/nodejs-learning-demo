@@ -16,6 +16,8 @@ Learning series about nodejs
   - [MongoDB Integration](#mongodb-integration)
     - [Mongoose ORM Tool](#mongoose-orm-tool)
 - [Authentication](#authentication)
+  - [Cookies](#cookies)
+  - [Session](#session)
 
 ## Introduction
 
@@ -214,3 +216,30 @@ module.exports = mongoose.model("Product", productSchema);
 ```
 
 ## Authentication
+
+### Cookies
+
+> To write login information of the user to cookie by using cookie based authetication, use `npm i cookie-parser` command. Usage of this module : \
+
+```javascript
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+```
+
+### Session
+
+> Use `npm install express-session` command to setup session module. Usage of the module: \
+
+```javascript
+const session = require("express-session");
+app.use(
+  session({
+    secret: "gokberk",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 3600000,
+    },
+  })
+);
+```

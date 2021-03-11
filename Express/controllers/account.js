@@ -5,8 +5,13 @@ exports.getLogin = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
     const { email, password } = req.body
     if (email == 'gokberk@gokberk.com' && password == '1234') {
+        // req.isAuthenticated = true
+        req.session.isAuthenticated = true
+        // res.cookie('isAuthenticated', true)
         res.redirect('/')
     } else {
+        // req.isAuthenticated = false
+        // res.cookie('isAuthenticated', false)
         res.redirect('/login')
     }
 }

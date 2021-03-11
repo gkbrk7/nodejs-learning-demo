@@ -4,6 +4,8 @@ const errorController = require('./controllers/errors');
 const mongoose = require('mongoose')
 const path = require('path');
 const User = require('./models/user')
+const cookieParser = require('cookie-parser')
+const session = require('express-session');
 
 const app = express()
 
@@ -15,6 +17,15 @@ const userRoutes = require("./routes/shop");
 const accountRoutes = require("./routes/account");
 
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser())
+app.use(session({
+    secret: "gokberk",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 3600000
+    }
+}))
 app.use(express.static(path.join(__dirname, "/public")))
 
 
